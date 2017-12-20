@@ -3,10 +3,41 @@
 <head lang="en">
 	<meta charset="utf-8">
 	<title></title>
+	<style>
+		ul {
+			border: 1px solid orange;
+		}
+	</style>
 	<script src="angular.js"></script>
 	<script src ="app.js"></script>
 </head>
-<body>
+<body ng-app="funwithcountries">
 
+	<h1>Fun with Countries</h1>
+		<!-- ng-controller directive attaches a controller class to the view-->
+	<div ng-controller="CountryController as countryCtrl">
+
+		<!-- Multiple Data Binding -->
+		<ul>
+
+			<!-- ng-repeat directive repeats a set of HTML. 
+					The set of HTML will be repeated once per item in a collection -->
+			<li ng-repeat="c in countryCtrl.countries">
+				<!-- ng-src directive overrides the original src attribute of an <img> element -->
+				<img ng-src="images/{{ c.code }}.png">
+				{{c.name}}
+
+				<!-- ng-hide/ng-show used to hide/show HTML if a certain condition is met -->
+				<ul ng-show="c.states.length > 0">
+					<li ng-repeat="s in c.states">
+						{{ s.name }}
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+		<!-- Single Data Binding
+			{{ countryCtrl.countries.name }}-->
+	</div>
 </body>
 </html>
